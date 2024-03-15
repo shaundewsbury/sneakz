@@ -12,7 +12,7 @@ import {
   RiShoppingBasket2Line,
   RiMenuFill,
 } from "react-icons/ri";
-import Icon from "../Icon";
+// import Icon from "../Icon";
 
 const Navbar = () => {
   const { user } = UserAuth();
@@ -25,7 +25,7 @@ const Navbar = () => {
   }, [user]);
 
   const menuClickHandler = () => {
-    console.log("clicked");
+    alert("Menu to open");
   };
 
   return (
@@ -36,15 +36,13 @@ const Navbar = () => {
         </button>
         <Link to="/">
           <div className="flex gap-2 items-center justify-center">
-            <div className="w-6 h-6 md:w-8 md:h-8">
-              <Icon />
-            </div>
             <span className="decorativeText text-white text-xl md:text-2xl lg:text-3xl cursor-pointer">
               SNEAKZ
             </span>
           </div>
         </Link>
-        <div className="flex gap-3">
+
+        <div className="hidden lg:flex gap-3">
           {navBarLinks.products.map((product) => (
             <Link to={product.link}>{product.label}</Link>
           ))}
@@ -54,7 +52,7 @@ const Navbar = () => {
           ))}
         </div>
         <div>
-          <div className="flex gap-3">
+          <div className="hidden lg:flex gap-3">
             {displayName && <p>Hey {displayName}</p>}
 
             {displayName ? (

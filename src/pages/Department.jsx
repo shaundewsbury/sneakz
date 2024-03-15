@@ -28,9 +28,9 @@ const Department = () => {
     setProductList(filterProducts);
   };
 
-  // eslint-disable-next-line
   useEffect(() => {
     getProductsFromDB();
+    // eslint-disable-next-line
   }, [departmentID]);
 
   return (
