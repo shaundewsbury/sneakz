@@ -1,13 +1,40 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Madimi+One");
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web");
+
+:root {
+  --color-primary: #1f2e44;
+  --color-secondary: #eaeff3;
+  --color-tertiary: #f9fafb;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root {
+  min-height: 100vh;
+  font-family: "Titillium Web", sans-serif;
+  background: var(--color-secondary);
+  color: var(--color-primary);
+}
+
+h1,
+.decorativeText {
+  font-family: "Madimi One", sans-serif;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+}
+
+p {
+  @apply text-base;
+}
+
+.box-shadow-custom {
+  box-shadow: rgba(1, 71, 112, 0.05) 4px 4px 0px;
 }
