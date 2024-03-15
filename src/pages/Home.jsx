@@ -19,6 +19,7 @@ const Home = () => {
             icon={<MdChevronRight className="w-6 h-6" />}
             iconRight
             title="Mens"
+            link="/department/mens"
           />
         </div>
         <div className="col-span-12 md:col-span-4">
@@ -26,6 +27,7 @@ const Home = () => {
             icon={<MdChevronRight className="w-6 h-6" />}
             iconRight
             title="Womens"
+            link="/department/womens"
           />
         </div>
         <div className="col-span-12 md:col-span-4">
@@ -33,6 +35,7 @@ const Home = () => {
             icon={<MdChevronRight className="w-6 h-6" />}
             iconRight
             title="Kids"
+            link="/department/kids"
           />
         </div>
       </div>
