@@ -7,8 +7,8 @@
 
 :root {
   --color-primary: #1f2e44;
-  --color-secondary: #eaeff3;
-  --color-tertiary: #f9fafb;
+  --color-secondary: #f5f7f9;
+  --color-tertiary: #d1e3f6;
 }
 
 #root {
@@ -16,6 +16,17 @@
   font-family: "Titillium Web", sans-serif;
   background: var(--color-secondary);
   color: var(--color-primary);
+}
+
+.content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.content.overlay {
+  position: fixed;
+  overflow: hidden;
+  opacity: 0.1;
 }
 
 h1,
@@ -33,6 +44,27 @@ h6 {
 
 p {
   @apply text-base;
+}
+
+a {
+  position: relative;
+}
+
+/* a:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 44px;
+  min-height: 44px;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+} */
+
+svg {
+  @apply w-6 h-6;
 }
 
 .box-shadow-custom {

@@ -2,17 +2,48 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 
+import { UserAuth } from "../context/AuthContext";
+import { db } from "../firebase";
+import { arrayUnion, doc, updateDoc, onSnapshot } from "firebase/firestore";
+import { useEffect } from "react";
+
 const ProductCard = ({ imgSrc, id, brand, description, colour, price }) => {
+  const { user } = UserAuth();
+  const userID = doc(db, "users", `${user?.email}`);
+
+  console.log(userID);
+
   const [liked, setLiked] = useState(false);
 
-  const likedButtonClickHandler = () => {
-    setLiked(!liked);
+  useEffect(() => {
+    onSnapshot(doc(db, "users", `${user?.email}`), (doc) => {
+      doc
+        .data()
+        .savedProducts.map((x) =>
+          x.id === id ? setLiked(true) : setLiked(false)
+        );
+    });
+  }, [id]);
+
+  const likedButtonClickHandler = async () => {
+    if (user?.email) {
+      setLiked(!liked);
+      await updateDoc(userID, {
+        savedProducts: arrayUnion({
+          id: id,
+          brand: brand,
+          img: imgSrc,
+        }),
+      });
+    } else {
+      alert("Please log in to save a product");
+    }
   };
 
   return (
     <div className="relative">
       <Link to={`/product/${id}`}>
-        <div className="p-4 box-shadow-custom rounded-md bg-white">
+        <div className="p-3 box-shadow-custom rounded-md bg-white">
           <div className="rounded-sm aspect-[3/4] mb-2 bg-[--color-secondary]">
             <img className="rounded-sm" src={imgSrc} />
           </div>

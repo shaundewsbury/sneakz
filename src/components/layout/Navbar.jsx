@@ -11,10 +11,14 @@ import {
   RiAccountCircleLine,
   RiShoppingBasket2Line,
   RiMenuFill,
+  RiSearchLine,
+  RiCloseLine,
 } from "react-icons/ri";
 // import Icon from "../Icon";
 
 const Navbar = () => {
+  const [openMenu, setOpenMenu] = useState(false);
+
   const { user } = UserAuth();
   const [displayName, setDisplayName] = useState("");
 
@@ -24,15 +28,21 @@ const Navbar = () => {
     });
   }, [user]);
 
-  const menuClickHandler = () => {
-    alert("Menu to open");
+  const openMenuClickHandler = () => {
+    setOpenMenu(true);
+    document.querySelector(".content").classList.add("overlay");
+  };
+
+  const closeMenuClickHandler = () => {
+    setOpenMenu(false);
+    document.querySelector(".content").classList.remove("overlay");
   };
 
   return (
-    <nav className="sticky top-0 left-0 p-4 bg-[--color-primary] box-shadow-custom mb-4 text-white z-[1]">
+    <nav className="flex items-center sticky top-0 left-0 h-14 px-4 bg-[--color-primary] mb-4 z-[1]">
       <div className="flex w-full max-w-[1280px] items-center justify-between m-auto">
-        <button className="lg:hidden" onClick={menuClickHandler}>
-          <RiMenuFill className="w-6 h-6 text-whit" />
+        <button className="lg:hidden text-white" onClick={openMenuClickHandler}>
+          <RiMenuFill />
         </button>
         <Link to="/">
           <div className="flex gap-2 items-center justify-center">
@@ -41,37 +51,88 @@ const Navbar = () => {
             </span>
           </div>
         </Link>
+        <Link className="lg:hidden text-white" to="/basket">
+          <RiShoppingBasket2Line />
+          <span className="sr-only">Basket</span>
+        </Link>
+
+        <div
+          className={
+            openMenu
+              ? "fixed lg:hidden left-0 top-0 w-[100%] h-full ease-in-out duration-500"
+              : "ease-in-out w-[100%] duration-500 fixed top-0 bottom-0 left-[-100%]"
+          }
+        >
+          <div className="flex items-center justify-between w-full h-14 px-4 bg-[--color-primary] text-white">
+            <h2>Menu</h2>
+
+            <button onClick={closeMenuClickHandler}>
+              <RiCloseLine />
+            </button>
+          </div>
+
+          <div className="h-full bg-[--color-secondary] p-4">
+            <div className="flex flex-col gap-3 items-start bg-[--color-secondary]">
+              <h3 className="text-lg decorativeText">Department</h3>
+              {navBarLinks.products.map((product) => (
+                <Link
+                  className="decorativeText hover:underline"
+                  to={product.link}
+                >
+                  {product.label}
+                </Link>
+              ))}
+            </div>
+
+            <hr className="w-full border-white border my-4" />
+
+            <div className="flex flex-col gap-3 items-start bg-[--color-secondary]">
+              <h3 className="text-lg decorativeText">Account</h3>
+              <Link className="flex gap-1" to="/account">
+                <RiAccountCircleLine />
+                <span className="decorativeText hover:underline">
+                  My Account
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
 
         <div className="hidden lg:flex gap-3">
           {navBarLinks.products.map((product) => (
-            <Link to={product.link}>{product.label}</Link>
-          ))}
-
-          {navBarLinks.company.map((company) => (
-            <Link to={company.link}>{company.label}</Link>
+            <Link className="decorativeText hover:underline" to={product.link}>
+              {product.label}
+            </Link>
           ))}
         </div>
-        <div>
-          <div className="hidden lg:flex gap-3">
-            {displayName && <p>Hey {displayName}</p>}
 
-            {displayName ? (
-              <Link to="/account">
-                <RiAccountCircleLine className="w-6 h-6 text-white" />
-              </Link>
-            ) : (
-              <Link to="/login">
-                <RiAccountCircleLine className="w-6 h-6 text-white" />
-              </Link>
-            )}
+        <div className="hidden lg:flex gap-3 text-white">
+          {/* {displayName && <p>Hey {displayName}</p>} */}
 
-            <Link to="/saved-products">
-              <GoHeart className="w-6 h-6 text-white" />
+          {displayName ? (
+            <Link to="/account">
+              <RiAccountCircleLine />
+              <span className="sr-only">Account</span>
             </Link>
-            <Link to="/basket">
-              <RiShoppingBasket2Line className="w-6 h-6 text-white" />
+          ) : (
+            <Link to="/login">
+              <RiAccountCircleLine />
+              <span className="sr-only">Login</span>
             </Link>
-          </div>
+          )}
+
+          <Link to="/x">
+            <RiSearchLine />
+            <span className="sr-only">Search</span>
+          </Link>
+          <Link to="/saved-products">
+            <GoHeart />
+            <span className="sr-only">Saved Products</span>
+          </Link>
+          <Link to="/basket">
+            <RiShoppingBasket2Line />
+            <span className="sr-only">Basket</span>
+          </Link>
         </div>
       </div>
     </nav>
