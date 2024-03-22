@@ -1,45 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import products from "../components/data/products.json";
+
 import Main from "../components/layout/Main";
 import ProductCard from "../components/ProductCard";
-import { db } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
-import PageTitle from "../components/PageTitle";
+import Accordion from "../components/Accordion";
+
 const AllProducts = () => {
-  const [productList, setProductList] = useState([]);
-
-  const getProductsFromDB = async () => {
-    const querySnapshot = await getDocs(collection(db, "products"));
-    const list = [];
-    querySnapshot.forEach((doc) => {
-      list.push({ id: doc.id, ...doc.data() });
-    });
-    setProductList(list);
-  };
-
-  useEffect(() => {
-    getProductsFromDB();
-  }, []);
-
   return (
     <Main>
-      <PageTitle className="mb-4" title="All Products" />
-      <p className="mb-8">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate
+      <Accordion
+        title="All Products"
+        content="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate
         minima explicabo eius odio quae, consectetur nam officiis, ipsam dolorum
         eaque sapiente obcaecati, qui sequi autem animi corporis cupiditate?
-        Esse, quaerat.
-      </p>
+        Esse, quaerat."
+      />
 
       <div className="grid grid-cols-12 gap-4">
-        {productList.length > 0 &&
-          productList.map((product) => (
+        {products.length > 0 &&
+          products.map((product) => (
             <div
               key={product.id}
               className="col-span-6 md:col-span-4 lg:col-span-3"
             >
               <ProductCard
                 id={product.id}
-                imgSrc={product.img}
+                img={product.img}
                 brand={product.brand}
                 description={product.description}
                 colour={product.colour}

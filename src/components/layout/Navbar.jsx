@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import { db } from "../../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
+import { useBasket } from "../../context/BasketContext";
 
 import { navBarLinks } from "../data/navBarLinks";
 
@@ -21,6 +22,8 @@ const Navbar = () => {
 
   const { user } = UserAuth();
   const [displayName, setDisplayName] = useState("");
+
+  const { basketQuantity } = useBasket();
 
   useEffect(() => {
     onSnapshot(doc(db, "users", `${user?.email}`), (doc) => {
@@ -43,6 +46,7 @@ const Navbar = () => {
       <div className="flex w-full max-w-[1280px] px-4 items-center justify-between m-auto">
         <button className="lg:hidden text-white" onClick={openMenuClickHandler}>
           <RiMenuFill />
+          <span className="sr-only">Open Menu</span>
         </button>
         <Link to="/">
           <div className="flex gap-2 items-center justify-center">
@@ -51,9 +55,16 @@ const Navbar = () => {
             </span>
           </div>
         </Link>
-        <Link className="lg:hidden text-white" to="/basket">
+        <Link className="relative lg:hidden text-white" to="/basket">
           <RiShoppingBasket2Line />
           <span className="sr-only">Basket</span>
+          {basketQuantity > 0 && (
+            <div className="flex items-center justify-center absolute top-[-0.5rem] right-[-0.5rem] bg-[--color-secondary]  border rounded-[50%] w-4 h-4">
+              <span className="text-xs font-bold text-[--color-primary]">
+                {basketQuantity}
+              </span>
+            </div>
+          )}
         </Link>
 
         <div
@@ -68,6 +79,7 @@ const Navbar = () => {
 
             <button onClick={closeMenuClickHandler}>
               <RiCloseLine />
+              <span className="sr-only">Close Menu</span>
             </button>
           </div>
 
@@ -99,7 +111,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="hidden lg:flex gap-3">
+        <div className="hidden lg:flex gap-3 text-white">
           {navBarLinks.products.map((product) => (
             <Link className="decorativeText hover:underline" to={product.link}>
               {product.label}
@@ -130,9 +142,16 @@ const Navbar = () => {
             <GoHeart />
             <span className="sr-only">Saved Products</span>
           </Link>
-          <Link to="/basket">
+          <Link className="relative" to="/basket">
             <RiShoppingBasket2Line />
             <span className="sr-only">Basket</span>
+            {basketQuantity > 0 && (
+              <div className="flex items-center justify-center absolute top-[-0.5rem] right-[-0.5rem] bg-[--color-secondary]  border rounded-[50%] w-4 h-4">
+                <span className="text-xs font-bold text-[--color-primary]">
+                  {basketQuantity}
+                </span>
+              </div>
+            )}
           </Link>
         </div>
       </div>

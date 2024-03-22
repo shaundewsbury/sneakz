@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import products from "../components/data/products.json";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 
 import { UserAuth } from "../context/AuthContext";
@@ -7,7 +8,7 @@ import { db } from "../firebase";
 import { arrayUnion, doc, updateDoc, onSnapshot } from "firebase/firestore";
 import { useEffect } from "react";
 
-const ProductCard = ({ imgSrc, id, brand, description, colour, price }) => {
+const ProductCard = ({ img, id, brand, description, colour, price }) => {
   const { user } = UserAuth();
   const userID = doc(db, "users", `${user?.email}`);
 
@@ -19,7 +20,7 @@ const ProductCard = ({ imgSrc, id, brand, description, colour, price }) => {
     onSnapshot(doc(db, "users", `${user?.email}`), (doc) => {
       doc
         .data()
-        .savedProducts.map((x) =>
+        .savedProducts?.map((x) =>
           x.id === id ? setLiked(true) : setLiked(false)
         );
     });
@@ -32,7 +33,7 @@ const ProductCard = ({ imgSrc, id, brand, description, colour, price }) => {
         savedProducts: arrayUnion({
           id: id,
           brand: brand,
-          img: imgSrc,
+          img: img,
         }),
       });
     } else {
@@ -48,13 +49,13 @@ const ProductCard = ({ imgSrc, id, brand, description, colour, price }) => {
             className="rounded-sm aspect-[3/4] mb-2 bg-[--color-secondary]"
             alt=""
           >
-            <img className="rounded-sm" src={imgSrc} />
+            <img className="rounded-sm" src={img} />
           </div>
           <p>{brand}</p>
           <p className="mb-2">
             {description} - {colour}
           </p>
-          <p className="font-semibold">£{price}</p>
+          <p className="font-bold">£{price}</p>
         </div>
       </Link>
       <button
