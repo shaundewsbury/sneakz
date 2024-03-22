@@ -39,8 +39,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex items-center sticky top-0 left-0 h-14 px-4 bg-[--color-primary] mb-4 z-[1]">
-      <div className="flex w-full max-w-[1280px] items-center justify-between m-auto">
+    <nav className="flex items-center sticky top-0 left-0 h-14 bg-[--color-primary] mb-4 z-[1]">
+      <div className="flex w-full max-w-[1280px] px-4 items-center justify-between m-auto">
         <button className="lg:hidden text-white" onClick={openMenuClickHandler}>
           <RiMenuFill />
         </button>
@@ -78,6 +78,7 @@ const Navbar = () => {
                 <Link
                   className="decorativeText hover:underline"
                   to={product.link}
+                  onClick={closeMenuClickHandler}
                 >
                   {product.label}
                 </Link>

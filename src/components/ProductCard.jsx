@@ -44,7 +44,10 @@ const ProductCard = ({ imgSrc, id, brand, description, colour, price }) => {
     <div className="relative">
       <Link to={`/product/${id}`}>
         <div className="p-3 box-shadow-custom rounded-md bg-white">
-          <div className="rounded-sm aspect-[3/4] mb-2 bg-[--color-secondary]">
+          <div
+            className="rounded-sm aspect-[3/4] mb-2 bg-[--color-secondary]"
+            alt=""
+          >
             <img className="rounded-sm" src={imgSrc} />
           </div>
           <p>{brand}</p>

@@ -5,6 +5,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Madimi+One");
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web");
 
+@import "@splidejs/react-splide/css";
+
 :root {
   --color-primary: #1f2e44;
   --color-secondary: #f5f7f9;
@@ -69,4 +71,26 @@ svg {
 
 .box-shadow-custom {
   box-shadow: rgba(1, 71, 112, 0.05) 4px 4px 0px;
+}
+
+.splide__track {
+  @media screen and (min-width: 1024px) {
+    max-width: calc(100% - 8rem);
+    margin: 0 auto;
+  }
+}
+
+.splide__pagination {
+  @apply relative bottom-0 mt-2;
+}
+
+.splide__arrows {
+  @apply hidden lg:block;
+}
+
+.splide__pagination__page {
+  @apply bg-[--color-tertiary];
+}
+.splide__pagination__page.is-active {
+  @apply bg-[--color-primary];
 }
