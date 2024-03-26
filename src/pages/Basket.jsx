@@ -3,6 +3,7 @@ import products from "../components/data/products.json";
 import { useBasket } from "../context/BasketContext";
 import BasketProductCard from "../components/BasketProductCard";
 import Main from "../components/layout/Main";
+import PageTitle from "../components/PageTitle";
 import Button from "../components/Button";
 const Basket = () => {
   const { basketItems } = useBasket();
@@ -21,8 +22,8 @@ const Basket = () => {
 
   return (
     <Main>
-      <h1>Basket</h1>
-      <div className="grid grid-cols-12 gap-4 mb-12">
+      <PageTitle title="Basket" />
+      <div className="grid grid-cols-12 gap-4 items-start mb-12">
         {basketItems.length > 0 ? (
           <>
             <div className="col-span-12 md:col-span-6 flex gap-4 flex-col">
@@ -33,20 +34,31 @@ const Basket = () => {
 
             <div className="col-span-12 md:col-span-6 p-4 box-shadow-custom rounded-md bg-white">
               <h3 className="mb-4">Order Summary</h3>
+
               <hr className="w-full border-[--color-secondary] border my-4" />
+
               <div className="flex justify-between mb-4">
                 <p>Order</p>
                 <p>£{productTotal}</p>
               </div>
+
               <div className="flex justify-between mb-4">
                 <p>Delivery</p>
                 <p>£{deliveryTotal}</p>
               </div>
+
+              <hr className="w-full border-[--color-secondary] border my-4" />
+
               <div className="flex justify-between mb-4">
-                <p>Total</p>
-                <p>£{productTotal + deliveryTotal}</p>
+                <p className="font-bold">Total</p>
+                <p className="font-bold">£{productTotal + deliveryTotal}</p>
               </div>
-              <Button text="Proceed to Checkout" />
+              <Button
+                className="my-4"
+                fullWidth
+                text="Proceed to Checkout"
+                onClick={() => alert("Placeholder - Checkout")}
+              />
             </div>
           </>
         ) : (

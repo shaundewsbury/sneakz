@@ -9,7 +9,7 @@ const Accordion = ({ title, content }) => {
   };
 
   return (
-    <div className="accordion mb-5 lg:mb-8">
+    <div className="accordion mb-5 lg:mb-6">
       <button
         className="flex gap-2 items-center"
         onClick={accordionClickHandler}
