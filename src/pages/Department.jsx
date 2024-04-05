@@ -13,6 +13,8 @@ import Button from "../components/Button";
 const Department = () => {
   const { departmentID } = useParams();
 
+  const [openFilterMenu, setOpenFilterMenu] = useState(false);
+
   const departmentProducts = products.filter(
     ({ department }) => department == departmentID
   );
@@ -26,7 +28,7 @@ const Department = () => {
   const [activeFilters, setActiveFilters] = useState([]);
 
   const filtersClickHandler = () => {
-    alert("clicked");
+    setOpenFilterMenu(true);
   };
 
   useEffect(() => {
@@ -107,6 +109,49 @@ const Department = () => {
 
   return (
     <Main>
+      <div
+        className={`${
+          openFilterMenu ? "absolute" : "hidden"
+        } w-full h-full left-0 top-0 z-[1] bg-white`}
+      >
+        <button onClick={() => setOpenFilterMenu(false)}>CLOSE</button>
+        <div className="filters">
+          <h2 className="text-2xl mb-4">Filters</h2>
+          <h2 className="text-lg mb-1">Brand</h2>
+          {filterByBrandList.map(({ item, value }) => (
+            <div key={item} className="flex gap-2 justify-between">
+              <button
+                className="flex gap-1 items-center"
+                onClick={() => filterItemClickHandler("brand", item)}
+              >
+                <div
+                  className={`w-3 h-3 rounded border border-[--color-primary] ${
+                    activeFilters.includes(item) && "bg-[--color-primary]"
+                  }`}
+                ></div>
+                <p className="">{item}</p>
+              </button>
+              <span className="">{value}</span>
+            </div>
+          ))}
+          <h2 className="text-lg mb-1">Colour</h2>
+          {filterByColourList.map(({ item, value }) => (
+            <div
+              key={item}
+              className="flex gap-2 justify-between"
+              onClick={() => filterItemClickHandler(item)}
+            >
+              <p className="">{item}</p>
+              <span className="">{value}</span>
+            </div>
+          ))}
+          <Button
+            onClick={() => setActiveFilters([])}
+            text="Reset"
+            className="mt-4"
+          />
+        </div>
+      </div>
       <Accordion
         title={categorySEO[departmentID].title}
         content={categorySEO[departmentID].description}
