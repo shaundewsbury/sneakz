@@ -16,6 +16,10 @@ const AllProducts = () => {
         Esse, quaerat."
       />
 
+      <p>
+        {products.length} Product{products.length > 1 && "s"}
+      </p>
+
       <div className="grid grid-cols-12 gap-4">
         {products.length > 0 &&
           products.map((product) => (

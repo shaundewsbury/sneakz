@@ -13,6 +13,7 @@ import Product from "./pages/Product";
 import Department from "./pages/Department";
 import Content from "./components/layout/Content";
 import Basket from "./pages/Basket";
+import SavedProducts from "./pages/SavedProducts";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="/basket" element={<Basket />} />
               <Route path="/all-products" element={<AllProducts />} />
               <Route path="/product/:productID" element={<Product />} />
+              <Route path="/saved-products" element={<SavedProducts />} />
               <Route
                 path="/department/:departmentID"
                 element={<Department />}

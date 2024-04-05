@@ -14,8 +14,9 @@ import {
   RiMenuFill,
   RiSearchLine,
   RiCloseLine,
+  RiContactsLine,
 } from "react-icons/ri";
-// import Icon from "../Icon";
+import { FaRegAddressCard } from "react-icons/fa";
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -99,13 +100,35 @@ const Navbar = () => {
 
             <hr className="w-full border-white border my-4" />
 
-            <div className="flex flex-col gap-3 items-start bg-[--color-secondary]">
-              <h3 className="text-lg decorativeText">Account</h3>
-              <Link className="flex gap-1" to="/account">
+            <div className="flex flex-col gap-5 items-start bg-[--color-secondary]">
+              <h3 className="text-lg decorativeText">Account & Support</h3>
+              <Link
+                className="flex gap-1"
+                to="/account"
+                onClick={closeMenuClickHandler}
+              >
                 <RiAccountCircleLine />
                 <span className="decorativeText hover:underline">
                   My Account
                 </span>
+              </Link>
+
+              <Link
+                className="flex gap-1"
+                to="/placeholder"
+                onClick={closeMenuClickHandler}
+              >
+                <RiContactsLine />
+                <span className="decorativeText hover:underline">Contact</span>
+              </Link>
+
+              <Link
+                className="flex gap-1"
+                to="/placeholder"
+                onClick={closeMenuClickHandler}
+              >
+                <FaRegAddressCard />
+                <span className="decorativeText hover:underline">About</span>
               </Link>
             </div>
           </div>
