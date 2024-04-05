@@ -19,6 +19,10 @@ const Department = () => {
 
   const [sortProducts, setSortProducts] = useState(departmentProducts);
 
+  useEffect(() => {
+    setSortProducts(departmentProducts);
+  }, [departmentID]);
+
   const [activeFilters, setActiveFilters] = useState([]);
 
   const filtersClickHandler = () => {
