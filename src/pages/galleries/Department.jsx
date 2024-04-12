@@ -33,6 +33,7 @@ const Department = () => {
   // SET DISPLAY PRODUCTS ON DEPARTMENT ID UPDATE
   useEffect(() => {
     setDisplayProducts(initialProducts);
+    setActiveFilters([]);
   }, [departmentID]);
 
   const filtersClickHandler = () => {
@@ -126,14 +127,21 @@ const Department = () => {
         ))}
       </div>
 
+      <hr class="w-full border-[--color-secondary] border my-4" />
+
       <Button
         onClick={() => setOpenFilterMenu(false)}
         text="Apply Filters"
-        className="mb-2"
+        className="lg:hidden mb-2"
         fullWidth
       />
 
-      <Button onClick={() => setActiveFilters([])} text="Reset" fullWidth />
+      <Button
+        onClick={() => setActiveFilters([])}
+        text="Reset"
+        fullWidth
+        secondaryVariant
+      />
     </div>
   );
 
