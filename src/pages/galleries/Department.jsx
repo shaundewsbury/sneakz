@@ -116,7 +116,7 @@ const Department = () => {
               onClick={() => filterItemClickHandler(item)}
             >
               <div
-                className={`w-4 h-4 rounded border border-[--color-primary] ${
+                className={`w-4 h-4 rounded border-2 border-[--color-primary] ${
                   activeFilters.includes(item) && "bg-[--color-primary]"
                 }`}
               ></div>
