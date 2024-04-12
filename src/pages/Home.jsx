@@ -5,6 +5,7 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import Main from "../components/layout/Main";
 import HeroBanner from "../components/HeroBanner";
 import ItemCard from "../components/ItemCard";
+import BrandCard from "../components/ui/brand-card/BrandCard";
 
 const Home = () => {
   return (
@@ -45,6 +46,8 @@ const Home = () => {
       </Main>
 
       <div className="max-w-[1280px] m-auto pl-4 lg:p-4">
+        <h2 className="text-xl md:text-2xl mb-4">Latest Brands</h2>
+
         <Splide
           options={{
             perPage: 4,
@@ -63,7 +66,11 @@ const Home = () => {
           }}
         >
           <SplideSlide>
-            <div className="aspect-square bg-slate-300" />
+            <BrandCard
+              brand="Lomax"
+              description="Lorem ipsum dolor sit amet"
+              link="/brand/lomax"
+            />
           </SplideSlide>
           <SplideSlide>
             <div className="aspect-square bg-slate-300" />

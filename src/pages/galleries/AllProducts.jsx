@@ -1,9 +1,9 @@
 import React from "react";
-import products from "../components/data/products.json";
+import products from "../../components/data/products.json";
 
-import Main from "../components/layout/Main";
-import ProductCard from "../components/ProductCard";
-import Accordion from "../components/Accordion";
+import Main from "../../components/layout/Main";
+import ProductCard from "../../components/ProductCard";
+import Accordion from "../../components/Accordion";
 
 const AllProducts = () => {
   return (

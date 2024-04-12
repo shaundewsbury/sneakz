@@ -31,6 +31,11 @@
   opacity: 0.1;
 }
 
+.content.no-scroll {
+  position: fixed;
+  overflow: hidden;
+}
+
 h1,
 .decorativeText {
   font-family: "Madimi One", sans-serif;
